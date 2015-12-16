@@ -1187,10 +1187,12 @@ static int do_make_bad_sector (int fd, __u64 lba, const char *devname)
 		r->lob.feat = make_bad_sector_flagged ? 0xaa : 0x55;
 		flagged     = make_bad_sector_flagged ? "flagged" : "pseudo";
 		printf("Corrupting sector %llu (WRITE_UNC_EXT as %s): ", lba, flagged);
+		printf("Sectors created: 1");
 	} else {
 		init_hdio_taskfile(r, ATA_OP_WRITE_LONG_ONCE, RW_WRITE, LBA28_OK, lba, 1, 520);
 		memset(r->data, 0xa5, 520);
 		printf("Corrupting sector %llu (WRITE_LONG): ", lba);
+		printf("Sectors created: 8");
 	}
 	fflush(stdout);
 
